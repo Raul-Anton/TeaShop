@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShop.Core.Abstract;
-using TeaShop.Core.Commands.User;
+using TeaShop.Core.Commands.Users;
 using TeaShop.Core.Domain;
 
 namespace TeaShop.Core.CommandHandlers.Users

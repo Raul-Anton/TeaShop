@@ -15,6 +15,14 @@ namespace TeaShop.Infrastructure.Data
         
         private IUserRepository _userRepository;
 
+        private IProductRepository _productRepository;
+
+        private IOrderRepository _orderRepository;
+
+        private IProductOrderRepository _productOrderRepository;
+
+        private IAddressRepository _addressRepository;
+
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -34,5 +42,60 @@ namespace TeaShop.Infrastructure.Data
             }
         }
 
+        public IProductRepository ProductRepository // *
+        {
+            get
+            {
+                if (_productRepository == null)
+                    _productRepository = new ProductRepository(_appDbContext);
+                return _productRepository;
+            }
+            set
+            {
+                _productRepository = value;
+            }
+        }
+
+        public IOrderRepository OrderRepository // *
+        {
+            get
+            {
+                if (_orderRepository == null)
+                    _orderRepository = new OrderRepository(_appDbContext);
+                return _orderRepository;
+            }
+            set
+            {
+                _orderRepository = value;
+            }
+        }
+
+        public IProductOrderRepository ProductOrderRepository
+        {
+            get
+            {
+                if (_productOrderRepository == null)
+                    _productOrderRepository = new ProductOrderRepository(_appDbContext);
+                return _productOrderRepository;
+            }
+            set
+            {
+                _productOrderRepository = value;
+            }
+        }
+
+        public IAddressRepository AddressRepository // *
+        {
+            get
+            {
+                if (_addressRepository == null)
+                    _addressRepository = new AddressRepository(_appDbContext);
+                return _addressRepository;
+            }
+            set
+            {
+                _addressRepository = value;
+            }
+        }
     }
 }

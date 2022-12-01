@@ -10,5 +10,13 @@ namespace TeaShop.Core.Abstract
     public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; set; }
+
+        IProductRepository ProductRepository { get; set; } // *
+
+        IOrderRepository OrderRepository { get; set; } // *
+
+        IProductOrderRepository ProductOrderRepository { get; set; } // *
+
+        IAddressRepository AddressRepository { get; set; } // *
     }
 }
