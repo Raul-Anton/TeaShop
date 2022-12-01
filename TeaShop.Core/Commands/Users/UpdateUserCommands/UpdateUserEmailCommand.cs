@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeaShop.Core.Commands.User
+namespace TeaShop.Core.Commands.Users.UpdateUserCommands
 {
-    public class CreateUserCommand : IRequest
+    public class UpdateUserEmailCommand : IRequest
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }

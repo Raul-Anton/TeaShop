@@ -11,7 +11,7 @@ namespace TeaShop.Infrastructure.Data
     {
         public IList<User> Users { get; set; } = new List<User>();
 
-        public IList<Product> Products { get; set; } = new List<Product>(); // *
+        public IList<Product> Products { get; set; } = new List<Product>();
 
         public IList<Order> Orders { get; set; } = new List<Order>();
 

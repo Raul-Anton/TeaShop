@@ -13,5 +13,15 @@ namespace TeaShop.Core.Abstract.Repository
 
         IEnumerable<User> GetUsers();
 
+        void DeleteUser(Guid id);
+
+        void UpdateUserName(Guid id, String name);
+
+        void UpdateUserEmail(Guid id, String email);
+
+        void UpdateUser(Guid id, String password);
+
+        //void UpdateUser(Guid id, Address address);
+
     }
 }
