@@ -23,6 +23,8 @@ namespace TeaShop.Infrastructure.Data
 
         private IAddressRepository _addressRepository;
 
+        private IImageRepository _imageRepository;
+
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -95,6 +97,20 @@ namespace TeaShop.Infrastructure.Data
             set
             {
                 _addressRepository = value;
+            }
+        }
+
+        public IImageRepository ImageRepository 
+        {
+            get
+            {
+                if (_imageRepository == null)
+                    _imageRepository = new ImageRepository(_appDbContext);
+                return _imageRepository;
+            }
+            set
+            {
+                _imageRepository = value;
             }
         }
     }

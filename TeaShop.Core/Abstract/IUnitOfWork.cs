@@ -18,5 +18,7 @@ namespace TeaShop.Core.Abstract
         IProductOrderRepository ProductOrderRepository { get; set; } // *
 
         IAddressRepository AddressRepository { get; set; } // *
+
+        IImageRepository ImageRepository { get; set; }
     }
 }

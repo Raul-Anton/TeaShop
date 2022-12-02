@@ -18,5 +18,7 @@ namespace TeaShop.Infrastructure.Data
         public IList<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
         public IList<Address> Addresses { get; set; } = new List<Address>();
+
+        public IList<Image> Images { get; set; } = new List<Image>();
     }
 }
