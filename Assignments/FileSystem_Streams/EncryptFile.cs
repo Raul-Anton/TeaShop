@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignments.FileSystem_Streams
 {
-    public class EncryptFile
+    public class EncryptDecryptFile
     {
         public void Encrypt(string path)
         {

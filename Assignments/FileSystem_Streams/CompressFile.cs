@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Assignments.FileSystem_Streams
 {
-    public class CompressFile
+    public class CompressDecompressFile
     {
         public void Compress(string originalFileName, string compressedFileName)
         {

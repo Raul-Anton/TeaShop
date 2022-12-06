@@ -1,34 +1,19 @@
-﻿using Assignments.FileSystem_Streams;
+﻿using Assignments.Arrays_Collections_Generics;
+using Assignments.FileSystem_Streams;
 using System.Runtime.CompilerServices;
 using TeaShop.Core.Domain;
 
-User user = new User();
-user.Id = new Guid();
-user.Name = "John";
+// Streams assignment test
 
-string path = @".\_UserDetails.txt";
+var fileSystemStreamsTest = new FileSystemStreamsTest();
 
-string originalFileName = @".\_UserDetails.txt";
-
-string compressedFileName = @".\_CompressedUserDetails.gz";
-
-string decompressedFileName = @".\_DecompressedUserDetails.txt";
+fileSystemStreamsTest.Test();
 
 
-ReadFile readFile = new ReadFile();
+// Generic Array assignment test
 
-WriteFile writeFile = new WriteFile();
+var genericArrayTest = new GenericArrayTest();
 
-EncryptFile encryptDecryptFile = new EncryptFile();
-
-CompressFile compressDecompressFile = new CompressFile();
-
-writeFile.Write(path, user);
-encryptDecryptFile.Encrypt(path);
-compressDecompressFile.Compress(originalFileName, compressedFileName);
-
-compressDecompressFile.Decompress(compressedFileName,decompressedFileName);
-encryptDecryptFile.Decrypt(decompressedFileName);
-Console.WriteLine(readFile.Read(decompressedFileName));
+genericArrayTest.Test();
 
 
