@@ -13,6 +13,7 @@ namespace TeaShop.Core.Domain
         public string AzurePath { get; set; }
 
         public Guid ProductId { get; set; }
+
         public Product Product { get; set; }
     }
 }

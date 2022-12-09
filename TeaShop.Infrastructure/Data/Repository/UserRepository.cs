@@ -25,7 +25,19 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public IEnumerable<User> GetUsers()
         {
-            return _appDbContext.Users.ToList();
+            return _appDbContext.Users;
+        }
+
+        public User GetUser(Guid id)
+        {
+            foreach (var user in _appDbContext.Users.ToList())
+            {
+                if (user.Id == id)
+                {
+                    return user;
+                }
+            }
+            throw new Exception("User not found");
         }
 
         public void DeleteUser(Guid id)
@@ -61,13 +73,24 @@ namespace TeaShop.Infrastructure.Data.Repository
             }
         }
 
-        public void UpdateUser(Guid id, string password)
+        public void UpdateUserPassword(Guid id, string password)
         {
             foreach (var user in _appDbContext.Users.ToList())
             {
                 if (user.Id == id)
                 {
                     user.Password = password;
+                }
+            }
+        }
+
+        public void UpdateUserAddress(Guid id, Address address)
+        {
+            foreach (var user in _appDbContext.Users.ToList())
+            {
+                if (user.Id == id)
+                {
+                    user.Address = address;
                 }
             }
         }
