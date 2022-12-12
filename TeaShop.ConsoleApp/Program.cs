@@ -2,12 +2,12 @@
 using TeaShop.Core.CommandHandlers.Users;
 using TeaShop.Core.CommandHandlers.Users.CreateUserCommandHandler;
 using TeaShop.Core.CommandHandlers.Users.DeleteUserCommandHandler;
-using TeaShop.Core.CommandHandlers.Users.UpdateUserCommandHandlers;
+using TeaShop.Core.CommandHandlers.Users.UpdateUserCommandHandler;
 using TeaShop.Core.Commands.Products;
 using TeaShop.Core.Commands.Users;
 using TeaShop.Core.Commands.Users.CreateUserCommand;
 using TeaShop.Core.Commands.Users.DeleteUserCommand;
-using TeaShop.Core.Commands.Users.UpdateUserCommands;
+using TeaShop.Core.Commands.Users.UpdateUserCommand;
 using TeaShop.Core.Domain;
 using TeaShop.Core.Queries.Products;
 using TeaShop.Core.Queries.Users;
@@ -23,7 +23,14 @@ var createUserCommand = new CreateUserCommand
     Name = "User1",
     Email = "user1@gmail",
     Password = "Password",
-    Address = new Address()
+    Address = new Address
+    {
+        Id= new Guid(),
+        City = "Timisoara",
+        Number = 42,
+        Street = "Ganea",
+    }
+
 };
 
 var deleteUserCommand = new DeleteUserCommand
@@ -31,7 +38,7 @@ var deleteUserCommand = new DeleteUserCommand
     Id = new Guid(),
 };
 
-var updateUserNameCommand = new UpdateUserNameCommand
+var updateUserNameCommand = new UpdateUserCommand
 {
     Id = new Guid(),
     Name = "John"
@@ -43,11 +50,11 @@ var unitOfWork = new UnitOfWork(appDbContext);
 
 var createUserHandler = new CreateUserCommandHandler(unitOfWork);
 //var deleteUserHandler = new DeleteUserCommandHandler(unitOfWork);
-var updateUserNameHandler = new UpdateUserNameCommandHandler(unitOfWork);
+//var updateUserNameHandler = new UpdateUserCommandHandler(unitOfWork);
 
 createUserHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
 //deleteUserHandler.Handle(deleteUserCommand, new System.Threading.CancellationToken()).Wait();
-updateUserNameHandler.Handle(updateUserNameCommand, new System.Threading.CancellationToken()).Wait();
+//updateUserNameHandler.Handle(updateUserNameCommand, new System.Threading.CancellationToken()).Wait();
 
 
 

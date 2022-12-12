@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace TeaShop.Infrastructure.Data.Repository
     {
         private readonly AppDbContext _appDbContext;
 
-        public UserRepository(AppDbContext appDbContext) 
+        public UserRepository(AppDbContext appDbContext)
         {
             _appDbContext= appDbContext;
         }
@@ -25,19 +26,14 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public IEnumerable<User> GetUsers()
         {
-            return _appDbContext.Users;
+            return _appDbContext.Users.Include(a => a.Address);
         }
 
         public User GetUser(Guid id)
         {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    return user;
-                }
-            }
             throw new Exception("User not found");
+            return _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+            // pune in variabila si verifica
         }
 
         public void DeleteUser(Guid id)
@@ -50,7 +46,7 @@ namespace TeaShop.Infrastructure.Data.Repository
                 }
             }
         }
-
+        // primeste un user
         public void UpdateUserName(Guid id, string name)
         {
             foreach (var user in _appDbContext.Users.ToList())

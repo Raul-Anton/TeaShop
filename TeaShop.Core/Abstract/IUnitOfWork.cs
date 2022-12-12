@@ -20,5 +20,7 @@ namespace TeaShop.Core.Abstract
         IAddressRepository AddressRepository { get; set; } // *
 
         IImageRepository ImageRepository { get; set; }
+
+        void SaveChanges();
     }
 }

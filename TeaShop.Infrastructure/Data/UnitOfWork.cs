@@ -113,5 +113,10 @@ namespace TeaShop.Infrastructure.Data
                 _imageRepository = value;
             }
         }
+
+        public void SaveChanges()
+        {
+            _appDbContext.SaveChanges();
+        }
     }
 }

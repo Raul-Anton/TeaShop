@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +8,35 @@ using TeaShop.Core.Domain;
 
 namespace TeaShop.Infrastructure.Data
 {
-    public class AppDbContext
+    public class AppDbContext : DbContext
     {
-        public IList<User> Users { get; set; } = new List<User>();
+        public AppDbContext()
+        {
 
-        public IList<Product> Products { get; set; } = new List<Product>();
+        }
 
-        public IList<Order> Orders { get; set; } = new List<Order>();
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions) { }
 
-        public IList<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
-        public IList<Address> Addresses { get; set; } = new List<Address>();
+        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
+        {
+            dbContextOptionsBuilder.UseSqlServer(@"Server=DESKTOP-7K11RRC\SQLEXPRESS;Database=TeaShop;Trusted_Connection=True;MultipleActiveResultSets = True;TrustServerCertificate=True");
+        }
 
-        public IList<Image> Images { get; set; } = new List<Image>();
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<ProductOrder> ProductOrders { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Image> Images { get; set; }
     }
 }
