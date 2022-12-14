@@ -51,37 +51,9 @@ namespace TeaShop.Infrastructure.Data.Repository
             return _appDbContext.Images;
         }
 
-        public void UpdateImageAzurePath(Guid id, string azurePath)
+        public void UpdateImage(Guid id, Image image)
         {
-            foreach (var image in _appDbContext.Images.ToList())
-            {
-                if (image.Id == id)
-                {
-                    image.AzurePath = azurePath;
-                }
-            }
-        }
-
-        public void UpdateImageProduct(Guid id, Product product)
-        {
-            foreach (var image in _appDbContext.Images.ToList())
-            {
-                if (image.Id == id)
-                {
-                    image.Product = product;
-                }
-            }
-        }
-
-        public void UpdateImageProductId(Guid id, Guid productId)
-        {
-            foreach (var image in _appDbContext.Images.ToList())
-            {
-                if (image.Id == id)
-                {
-                    image.ProductId = productId;
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

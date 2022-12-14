@@ -51,37 +51,9 @@ namespace TeaShop.Infrastructure.Data.Repository
             return _appDbContext.Orders.ToList();
         }
 
-        public void UpdateOrderProductOrders(Guid id, List<ProductOrder> productOrders)
+        public void UpdateOrder(Guid id, Order order)
         {
-            foreach (var order in _appDbContext.Orders.ToList())
-            {
-                if (order.Id == id)
-                {
-                    order.ProductOrders = productOrders;
-                }
-            }
-        }
-
-        public void UpdateOrderUser(Guid id, User user)
-        {
-            foreach (var order in _appDbContext.Orders.ToList())
-            {
-                if (order.Id == id)
-                {
-                    order.User = user;
-                }
-            }
-        }
-
-        public void UpdateOrderUserId(Guid id, Guid userId)
-        {
-            foreach (var order in _appDbContext.Orders.ToList())
-            {
-                if (order.Id == id)
-                {
-                    order.UserId = userId;
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace TeaShop.Core.CommandHandlers.Addresses.DeleteAddressCommandHandler
         public async Task<Unit> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
         {
             _unitOfWork.AddressRepository.DeleteAddress(request.Id);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

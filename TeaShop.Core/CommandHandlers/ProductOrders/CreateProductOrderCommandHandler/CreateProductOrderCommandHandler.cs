@@ -30,6 +30,7 @@ namespace TeaShop.Core.CommandHandlers.ProductOrders.CreateProductOrderCommandHa
                 Order = request.Order
             };
             _unitOfWork.ProductOrderRepository.AddProduct(productOrder);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

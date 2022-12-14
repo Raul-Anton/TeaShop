@@ -31,6 +31,7 @@ namespace TeaShop.Core.CommandHandlers.Addresses.CreateAddressCommandHandler
                 User = request.User
             };
             _unitOfWork.AddressRepository.AddAddress(address);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

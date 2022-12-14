@@ -17,10 +17,6 @@ namespace TeaShop.Core.Abstract.Repository
 
         void DeleteOrder(Guid id);
 
-        void UpdateOrderUserId(Guid id, Guid userId);
-
-        void UpdateOrderUser(Guid id, User user);
-
-        void UpdateOrderProductOrders(Guid id, List<ProductOrder> productOrders);
+        void UpdateOrder(Guid id, Order order);
     }
 }

@@ -20,7 +20,8 @@ namespace TeaShop.Core.CommandHandlers.Users.UpdateUserCommandHandler
 
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.UserRepository.UpdateUserName(request.Id, request.Name);
+            _unitOfWork.UserRepository.UpdateUser(request.Id, request.User);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

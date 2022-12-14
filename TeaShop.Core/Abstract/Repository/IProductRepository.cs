@@ -17,18 +17,6 @@ namespace TeaShop.Core.Abstract.Repository
 
         void DeleteProduct(Guid id);
 
-        void UpdateProductName(Guid id, String name);
-
-        void UpdateProductDescription(Guid id, String description);
-
-        void UpdateProductPrice(Guid id, Double price);
-
-        void UpdateProductQuantity(Guid id, int quantity);
-
-        void UpdateProductProductOrderList(Guid id, List<ProductOrder> productOrderList);
-
-        void UpdateProductImage(Guid id, Image image);
-
-
+        void UpdateProduct(Guid id, Product product);
     }
 }

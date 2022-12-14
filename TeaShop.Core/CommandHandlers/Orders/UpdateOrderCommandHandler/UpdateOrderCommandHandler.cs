@@ -9,7 +9,7 @@ using TeaShop.Core.Commands.Orders.UpdateOrderCommand;
 
 namespace TeaShop.Core.CommandHandlers.Orders.UpdateOrderCommandHandler
 {
-    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderUserCommand>
+    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     {
         private IUnitOfWork _unitOfWork;
 
@@ -18,9 +18,10 @@ namespace TeaShop.Core.CommandHandlers.Orders.UpdateOrderCommandHandler
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(UpdateOrderUserCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.OrderRepository.UpdateOrderUser(request.Id, request.User);
+            _unitOfWork.OrderRepository.UpdateOrder(request.Id, request.Order);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

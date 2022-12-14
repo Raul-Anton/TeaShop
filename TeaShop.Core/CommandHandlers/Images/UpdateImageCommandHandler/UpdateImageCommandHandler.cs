@@ -20,7 +20,8 @@ namespace TeaShop.Core.CommandHandlers.Images.UpdateImageCommandHandler
 
         public async Task<Unit> Handle(UpdateImageCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ImageRepository.UpdateImageAzurePath(request.Id, request.AzurePath);
+            _unitOfWork.ImageRepository.UpdateImage(request.Id, request.Image);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

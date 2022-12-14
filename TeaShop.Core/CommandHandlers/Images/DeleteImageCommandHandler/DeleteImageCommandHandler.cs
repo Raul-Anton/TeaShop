@@ -21,6 +21,7 @@ namespace TeaShop.Core.CommandHandlers.Images.DeleteImageCommandHandler
         public async Task<Unit> Handle(DeleteImageCommand request, CancellationToken cancellationToken)
         {
             _unitOfWork.ImageRepository.DeleteImage(request.Id);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

@@ -17,13 +17,6 @@ namespace TeaShop.Core.Abstract.Repository
 
         void DeleteUser(Guid id);
 
-        void UpdateUserName(Guid id, String name);
-
-        void UpdateUserEmail(Guid id, String email);
-
-        void UpdateUserPassword(Guid id, String password);
-
-        void UpdateUserAddress(Guid id, Address address);
-
+        void UpdateUser(Guid id, User user);
     }
 }

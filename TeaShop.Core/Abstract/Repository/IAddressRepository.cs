@@ -17,14 +17,6 @@ namespace TeaShop.Core.Abstract.Repository
 
         void DeleteAddress(Guid id);
 
-        void UpdateAddressCity(Guid id, String city);
-
-        void UpdateAddressStreet(Guid id, String street);
-
-        void UpdateAddressNumber(Guid id, int number);
-
-        void UpdateAddressUserId(Guid id, Guid userId);
-
-        void UpdateAddressUser(Guid id, User user);
+        void UpdateAddress(Guid id, Address address);
     }
 }

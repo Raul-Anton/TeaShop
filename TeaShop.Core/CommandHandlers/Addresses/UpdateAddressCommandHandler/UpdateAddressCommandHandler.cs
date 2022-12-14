@@ -9,7 +9,7 @@ using TeaShop.Core.Commands.Addresses.UpdateAddressCommand;
 
 namespace TeaShop.Core.CommandHandlers.Addresses.UpdateAddressCommandHandler
 {
-    public class UpdateAddressCommandHandler : IRequestHandler<UpdateAddressCityCommand>
+    public class UpdateAddressCommandHandler : IRequestHandler<UpdateAddressCommand>
     {
         private IUnitOfWork _unitOfWork;
 
@@ -18,9 +18,10 @@ namespace TeaShop.Core.CommandHandlers.Addresses.UpdateAddressCommandHandler
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(UpdateAddressCityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.AddressRepository.UpdateAddressCity(request.Id, request.City);
+            _unitOfWork.AddressRepository.UpdateAddress(request.Id, request.Address);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

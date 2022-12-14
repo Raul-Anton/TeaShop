@@ -17,10 +17,6 @@ namespace TeaShop.Core.Abstract.Repository
 
         void DeleteImage(Guid id);
 
-        void UpdateImageAzurePath(Guid id, String azurePath);
-
-        void UpdateImageProductId(Guid id, Guid productId);
-
-        void UpdateImageProduct(Guid id, Product product);
+        void UpdateImage(Guid id, Image image);
     }
 }

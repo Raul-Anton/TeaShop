@@ -21,6 +21,7 @@ namespace TeaShop.Core.CommandHandlers.Users.DeleteUserCommandHandler
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             _unitOfWork.UserRepository.DeleteUser(request.Id);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

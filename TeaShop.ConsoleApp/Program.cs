@@ -11,9 +11,11 @@ using TeaShop.Core.Commands.Users.UpdateUserCommand;
 using TeaShop.Core.Domain;
 using TeaShop.Core.Queries.Products;
 using TeaShop.Core.Queries.Users;
+using TeaShop.Core.Queries.Users.GetUserQuery;
 using TeaShop.Core.Queries.Users.GetUsersQuery;
 using TeaShop.Core.QueryHandlers.Products;
 using TeaShop.Core.QueryHandlers.Users;
+using TeaShop.Core.QueryHandlers.Users.GetUserQueryHandler;
 using TeaShop.Core.QueryHandlers.Users.GetUsersQueryHandler;
 using TeaShop.Infrastructure.Data;
 
@@ -33,48 +35,104 @@ var createUserCommand = new CreateUserCommand
 
 };
 
+var createUserCommand2 = new CreateUserCommand
+{
+    Id = new Guid(),
+    Name = "User2",
+    Email = "user2@gmail",
+    Password = "Password2",
+    Address = new Address
+    {
+        Id = new Guid(),
+        City = "Timisoara2",
+        Number = 422,
+        Street = "Ganea2",
+    }
+
+};
+
 var deleteUserCommand = new DeleteUserCommand
 {
-    Id = new Guid(),
+    Id = new Guid("24A3348B-C745-4459-97AB-08DADDE7BFEA"),
 };
 
-var updateUserNameCommand = new UpdateUserCommand
+var updateUser = new User
 {
     Id = new Guid(),
-    Name = "John"
+    Name = "UpdatedUser",
+    Email = "updatedUser@gmail",
+    Password = "updatedPassword",
+    Address = new Address
+    {
+        Id = new Guid(),
+        City = "updatedCity",
+        Number = 40,
+        Street = "updatedStreet",
+    }
 };
 
+var updateUserCommand = new UpdateUserCommand
+{
+    Id = new Guid("24A3348B-C745-4459-97AB-08DADDE7BFEA"),
+    User = updateUser
+};
+
+// Initialize appDbContext and UnitOfWork
 var appDbContext = new AppDbContext();
 
 var unitOfWork = new UnitOfWork(appDbContext);
 
-var createUserHandler = new CreateUserCommandHandler(unitOfWork);
+
+
+// Create Commands
+//var createUserHandler = new CreateUserCommandHandler(unitOfWork);
+//var createUserHandler2 = new CreateUserCommandHandler(unitOfWork);
+
 //var deleteUserHandler = new DeleteUserCommandHandler(unitOfWork);
-//var updateUserNameHandler = new UpdateUserCommandHandler(unitOfWork);
+//var updateUserHandler = new UpdateUserCommandHandler(unitOfWork);
 
-createUserHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
+// Handle Commands
+//createUserHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
+//createUserHandler2.Handle(createUserCommand2, new System.Threading.CancellationToken()).Wait();
+
 //deleteUserHandler.Handle(deleteUserCommand, new System.Threading.CancellationToken()).Wait();
-//updateUserNameHandler.Handle(updateUserNameCommand, new System.Threading.CancellationToken()).Wait();
+//updateUserHandler.Handle(updateUserCommand, new System.Threading.CancellationToken()).Wait();
 
 
 
+// Queries
+var getUsersQuery = new GetUsersQuery();
+
+Guid id = new Guid("24A3348B-C745-4459-97AB-08DADDE7BFEA");
+var getUserQuery = new GetUserQuery
+{
+    Id = id
+};
+
+// QueruesHandlers
+var getUsersQueryHandler = new GetUsersQueryHandler(unitOfWork);
+//var getUserQueryHandler = new GetUserQueryHandler(unitOfWork);
+
+// Use Queries
+var getUsersQueryResult = await getUsersQueryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
+//var getUserQueryResult = await getUserQueryHandler.Handle(getUserQuery, new System.Threading.CancellationToken());
 
 
-
-var query = new GetUsersQuery();
-
-var queryHandler = new GetUsersQueryHandler(unitOfWork);
-
-var userList = await queryHandler.Handle(query, new System.Threading.CancellationToken());
-
-foreach (var user in userList)
+foreach (var user in getUsersQueryResult)
 {
     Console.WriteLine(user.Id);
     Console.WriteLine(user.Name);
     Console.WriteLine(user.Email);
     Console.WriteLine(user.Password);
     Console.WriteLine(user.Address);
-
+    Console.WriteLine();
 }
 
-Console.WriteLine();
+
+/*
+Console.WriteLine(getUserQueryResult.Id);
+Console.WriteLine(getUserQueryResult.Name);
+Console.WriteLine(getUserQueryResult.Email);
+Console.WriteLine(getUserQueryResult.Password);
+Console.WriteLine(getUserQueryResult.Address);
+*/

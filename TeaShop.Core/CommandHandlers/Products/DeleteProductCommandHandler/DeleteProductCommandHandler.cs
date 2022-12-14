@@ -21,6 +21,7 @@ namespace TeaShop.Core.CommandHandlers.Products.DeleteProductCommandHandler
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             _unitOfWork.ProductRepository.DeleteProduct(request.Id);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

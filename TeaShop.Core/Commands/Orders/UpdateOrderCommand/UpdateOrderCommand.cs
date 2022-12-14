@@ -8,10 +8,10 @@ using TeaShop.Core.Domain;
 
 namespace TeaShop.Core.Commands.Orders.UpdateOrderCommand
 {
-    public class UpdateOrderUserCommand : IRequest
+    public class UpdateOrderCommand : IRequest
     {
         public Guid Id { get; set; }
 
-        public User User { get; set; }
+        public Order Order { get; set; }
     }
 }

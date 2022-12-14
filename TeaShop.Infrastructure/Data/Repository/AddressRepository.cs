@@ -51,59 +51,9 @@ namespace TeaShop.Infrastructure.Data.Repository
             return _appDbContext.Addresses.ToList();
         }
 
-        public void UpdateAddressCity(Guid id, string city)
+        public void UpdateAddress(Guid id, Address address)
         {
-            foreach (var address in _appDbContext.Addresses.ToList())
-            {
-                if (address.Id == id)
-                {
-                    address.City = city;
-                }
-            }
-        }
-
-        public void UpdateAddressNumber(Guid id, int number)
-        {
-            foreach (var address in _appDbContext.Addresses.ToList())
-            {
-                if (address.Id == id)
-                {
-                    address.Number = number;
-                }
-            }
-        }
-
-        public void UpdateAddressStreet(Guid id, string street)
-        {
-            foreach (var address in _appDbContext.Addresses.ToList())
-            {
-                if (address.Id == id)
-                {
-                    address.Street = street;
-                }
-            }
-        }
-
-        public void UpdateAddressUser(Guid id, User user)
-        {
-            foreach (var address in _appDbContext.Addresses.ToList())
-            {
-                if (address.Id == id)
-                {
-                    address.User = user;
-                }
-            }
-        }
-
-        public void UpdateAddressUserId(Guid id, Guid userId)
-        {
-            foreach (var address in _appDbContext.Addresses.ToList())
-            {
-                if (address.Id == id)
-                {
-                    address.UserId = userId;
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

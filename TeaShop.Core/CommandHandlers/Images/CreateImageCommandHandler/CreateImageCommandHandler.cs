@@ -29,6 +29,7 @@ namespace TeaShop.Core.CommandHandlers.Images.CreateImageCommandHandler
                 Product = request.Product
             };
             _unitOfWork.ImageRepository.AddImage(image);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

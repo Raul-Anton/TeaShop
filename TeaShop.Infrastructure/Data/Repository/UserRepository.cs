@@ -31,64 +31,31 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public User GetUser(Guid id)
         {
-            throw new Exception("User not found");
-            return _appDbContext.Users.SingleOrDefault(a => a.Id == id);
-            // pune in variabila si verifica
+            var user = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+
+            if (user == null) 
+            {
+                throw new Exception("User not found");
+            }
+
+            return user;
         }
 
         public void DeleteUser(Guid id)
         {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    _appDbContext.Users.Remove(user);
-                }
-            }
-        }
-        // primeste un user
-        public void UpdateUserName(Guid id, string name)
-        {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    user.Name = name;
-                }
-            }
+            var user = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+
+            _appDbContext.Users.Remove(user);
         }
 
-        public void UpdateUserEmail(Guid id, string email)
+        public void UpdateUser(Guid id, User user)
         {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    user.Email = email;
-                }
-            }
-        }
+            var u = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
 
-        public void UpdateUserPassword(Guid id, string password)
-        {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    user.Password = password;
-                }
-            }
-        }
-
-        public void UpdateUserAddress(Guid id, Address address)
-        {
-            foreach (var user in _appDbContext.Users.ToList())
-            {
-                if (user.Id == id)
-                {
-                    user.Address = address;
-                }
-            }
+            u.Name = user.Name;
+            u.Email = user.Email;
+            u.Password = user.Password;
+            u.Address = user.Address;
         }
     }
 }

@@ -20,7 +20,8 @@ namespace TeaShop.Core.CommandHandlers.ProductOrders.UpdateProductOrdersCommandH
 
         public async Task<Unit> Handle(UpdateProductOrderCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ProductOrderRepository.UpdateProductOrderOrder(request.Id, request.Order);
+            _unitOfWork.ProductOrderRepository.UpdateProductOrder(request.Id, request.ProductOrder);
+            _unitOfWork.SaveChanges();
             return Unit.Value;
         }
     }

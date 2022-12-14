@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeaShop.Core.Domain;
 
 namespace TeaShop.Core.Commands.Images.UpdateImageCommand
 {
@@ -11,6 +12,6 @@ namespace TeaShop.Core.Commands.Images.UpdateImageCommand
     {
         public Guid Id { get; set; }
 
-        public string AzurePath { get; set; }
+        public Image Image { get; set; }
     }
 }

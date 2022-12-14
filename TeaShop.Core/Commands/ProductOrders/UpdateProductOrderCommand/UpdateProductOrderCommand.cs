@@ -12,6 +12,6 @@ namespace TeaShop.Core.Commands.ProductOrders.UpdateProductOrderCommand
     {
         public Guid Id { get; set; }
 
-        public Order Order { get; set; }
+        public ProductOrder ProductOrder { get; set; }
     }
 }
