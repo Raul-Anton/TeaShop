@@ -8,7 +8,8 @@ using TeaShop.Core.Domain;
 
 namespace TeaShop.Core.Queries.Addresses.GetAddressQuery
 {
-    public class GetAddressQuery : IRequest<IEnumerable<Address>>
+    public class GetAddressQuery : IRequest<Address>
     {
+        public Guid Id { get; set; }
     }
 }
