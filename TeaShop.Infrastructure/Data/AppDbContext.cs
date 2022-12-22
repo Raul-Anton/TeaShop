@@ -21,12 +21,6 @@ namespace TeaShop.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
-        {
-            dbContextOptionsBuilder.UseSqlServer(@"Server=DESKTOP-7K11RRC\SQLEXPRESS;Database=TeaShop;Trusted_Connection=True;MultipleActiveResultSets = True;TrustServerCertificate=True");
-        }
-
         public DbSet<User> Users { get; set; }
 
         public DbSet<Product> Products { get; set; }

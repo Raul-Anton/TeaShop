@@ -16,14 +16,10 @@ namespace TeaShop.Infrastructure.Services
             _cloudBlobClient = storageAccount.CreateCloudBlobClient();
         }
 
-
-
         public Task<string> UploadFormFileAsync(IFormFile file)
         {
             return UploadStreamToBlobAsync(file.OpenReadStream, file.FileName);
         }
-
-
 
         public async Task<string> UploadStreamToBlobAsync(Func<Stream> openStream, string fileName)
         {
@@ -34,13 +30,9 @@ namespace TeaShop.Infrastructure.Services
                 PublicAccess = BlobContainerPublicAccessType.Blob
             };
 
-
-
             await cloudBlobContainer.SetPermissionsAsync(permissions);
             string path = GetBlobPath(fileName);
             CloudBlockBlob blob = cloudBlobContainer.GetBlockBlobReference(path);
-
-
 
             if (blob != null)
             {
@@ -51,16 +43,12 @@ namespace TeaShop.Infrastructure.Services
             return uri;
         }
 
-
-
         private async Task<CloudBlobContainer> GetBlobContainerAsync()
         {
             CloudBlobContainer cloudBlobContainer = _cloudBlobClient.GetContainerReference(_containerName);
             await cloudBlobContainer.CreateIfNotExistsAsync();
             return cloudBlobContainer;
         }
-
-
 
         private static string GetBlobPath(string fileName)
         {

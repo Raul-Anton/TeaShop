@@ -23,20 +23,20 @@ using TeaShop.Core.QueryHandlers.Users.GetUsersQueryHandler;
 using TeaShop.Infrastructure.Data;
 using TeaShop.Infrastructure.Services;
 
-string containerName = "images";
-string connectionString = "DefaultEndpointsProtocol=https;AccountName=storageaccountinternship;AccountKey=RZ+vz/KG1fOfe+zEi8n9TtNU9UY9ZpkZbjEgbNA/2xD1TN9+W3/lnFoZipJUn8atienNkjMDbKI1haB1vrLeCQ==;EndpointSuffix=core.windows.net";
-var image = await OpenReadAsync("image.jpg");
-Task<Stream> OpenReadAsync(string path)
-{
-    return Task.FromResult((Stream)File.OpenRead(path));
-}
-var fileName = "phone";
-IFormFile formFile = new FormFile(image, 0, image.Length, "form", fileName);
+//string containerName = "images";
+//string connectionString = "DefaultEndpointsProtocol=https;AccountName=storageaccountinternship;AccountKey=RZ+vz/KG1fOfe+zEi8n9TtNU9UY9ZpkZbjEgbNA/2xD1TN9+W3/lnFoZipJUn8atienNkjMDbKI1haB1vrLeCQ==;EndpointSuffix=core.windows.net";
+//var image = await OpenReadAsync("image.jpg");
+//Task<Stream> OpenReadAsync(string path)
+//{
+//   return Task.FromResult((Stream)File.OpenRead(path));
+//}
+//var fileName = "phone";
+//IFormFile formFile = new FormFile(image, 0, image.Length, "form", fileName);
 
 // controllere, salvez in imageRepository URL-ul
 
-IImageService imageService = new AzureBlobImageService(connectionString, containerName);
-var test = await imageService.UploadFormFileAsync(formFile);
+//IImageService imageService = new AzureBlobImageService(connectionString, containerName);
+//var test = await imageService.UploadFormFileAsync(formFile);
 
 var createUserCommand = new CreateUserCommand
 {
