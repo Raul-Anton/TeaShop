@@ -8,7 +8,7 @@ using TeaShop.Core.Domain;
 
 namespace TeaShop.Core.Queries.Users.GetUserQuery
 {
-    public class GetUserQuery : IRequest<User>
+    public class UpdateUserQuery : IRequest<User>
     {
         public Guid Id { get; set; }
     }

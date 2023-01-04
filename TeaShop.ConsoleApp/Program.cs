@@ -123,7 +123,7 @@ var unitOfWork = new UnitOfWork(appDbContext);
 var getUsersQuery = new GetUsersQuery();
 
 Guid id = new Guid("24A3348B-C745-4459-97AB-08DADDE7BFEA");
-var getUserQuery = new GetUserQuery
+var getUserQuery = new UpdateUserQuery
 {
     Id = id
 };

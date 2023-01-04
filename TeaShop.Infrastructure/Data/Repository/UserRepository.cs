@@ -31,7 +31,7 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public User GetUser(Guid id)
         {
-            var user = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+            var user = _appDbContext.Users.Include(a => a.Address).SingleOrDefault(a => a.Id == id);
 
             if (user == null) 
             {
@@ -50,12 +50,14 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public void UpdateUser(Guid id, User user)
         {
-            var u = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+            var u = _appDbContext.Users.Include(a => a.Address).SingleOrDefault(a => a.Id == id);
 
             u.Name = user.Name;
             u.Email = user.Email;
             u.Password = user.Password;
-            u.Address = user.Address;
+            u.Address.City = user.Address.City;
+            u.Address.Street = user.Address.Street;
+            u.Address.Number = user.Address.Number;
         }
     }
 }
