@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeaShop.Core.DTO.User.Get
+namespace TeaShop.Core.DTO.User
 {
-    public class GetUserAddressDto
+    public class UserAddressDTO
     {
         public string City { get; set; }
 

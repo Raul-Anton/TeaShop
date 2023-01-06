@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeaShop.Core.Domain;
+using TeaShop.Core.DTO.User;
 
-namespace TeaShop.Core.DTO.User.Get
+namespace TeaShop.Core.DTO.User
 {
-    public class GetUserDto
+    public class UserDTO
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Email { get; set; }
 
         public string Password { get; set; }
 
-        public GetUserAddressDto Address { get; set; }
+        public UserAddressDTO Address { get; set; }
     }
 }

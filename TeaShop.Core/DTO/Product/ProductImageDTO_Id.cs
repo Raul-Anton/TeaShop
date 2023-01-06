@@ -1,15 +1,15 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeaShop.Core.Domain;
 
-namespace TeaShop.Core.Queries.Users.GetUserQuery
+namespace TeaShop.Core.DTO.Product
 {
-    public class GetUserQuery : IRequest<User>
+    public class ProductImageDTO_Id
     {
         public Guid Id { get; set; }
+
+        public string AzurePath { get; set; }
     }
 }

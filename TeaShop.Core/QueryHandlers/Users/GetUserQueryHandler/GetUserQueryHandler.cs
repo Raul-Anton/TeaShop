@@ -10,7 +10,7 @@ using TeaShop.Core.Queries.Users.GetUserQuery;
 
 namespace TeaShop.Core.QueryHandlers.Users.GetUserQueryHandler
 {
-    public class GetUserQueryHandler : IRequestHandler<UpdateUserQuery, User>
+    public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
     {
         private IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace TeaShop.Core.QueryHandlers.Users.GetUserQueryHandler
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> Handle(UpdateUserQuery request, CancellationToken cancellationToken)
+        public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             return _unitOfWork.UserRepository.GetUser(request.Id);
         }

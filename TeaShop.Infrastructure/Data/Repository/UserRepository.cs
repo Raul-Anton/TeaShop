@@ -43,7 +43,7 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public void DeleteUser(Guid id)
         {
-            var user = _appDbContext.Users.SingleOrDefault(a => a.Id == id);
+            var user = _appDbContext.Users.Include(a => a.Address).SingleOrDefault(a => a.Id == id);
 
             _appDbContext.Users.Remove(user);
         }

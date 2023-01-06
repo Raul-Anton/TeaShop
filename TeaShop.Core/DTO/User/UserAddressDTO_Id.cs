@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeaShop.Core.DTO.User.Post
+namespace TeaShop.Core.DTO.User
 {
-    public class PostUserAddressDto
+    internal class UserAddressDTO_Id
     {
+        public Guid Id { get; set; }
+
         public string City { get; set; }
 
         public string Street { get; set; }

@@ -30,6 +30,7 @@ namespace TeaShop.Core.CommandHandlers.Products.CreateProductCommandHandler
                 Quantity = request.Quantity,
                 ProductOrders = request.ProductOrders,
                 Image = request.Image
+                // assign uri from blolb image service
             };
             _unitOfWork.ProductRepository.AddProduct(product);
             _unitOfWork.SaveChanges();

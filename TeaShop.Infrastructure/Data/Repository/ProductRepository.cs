@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,35 +26,38 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public void DeleteProduct(Guid id)
         {
-            foreach (var product in _appDbContext.Products.ToList())
-            {
-                if (product.Id == id)
-                {
-                    _appDbContext.Products.Remove(product);
-                }
-            }
+            var product = _appDbContext.Products.Include(a => a.ProductOrders).Include(a => a.Image).SingleOrDefault(a => a.Id == id);
+
+            _appDbContext.Products.Remove(product);
         }
 
         public Product GetProduct(Guid id)
         {
-            foreach (var product in _appDbContext.Products.ToList())
+            var product = _appDbContext.Products.Include(a => a.ProductOrders).Include(a => a.Image).SingleOrDefault(a => a.Id == id);
+
+            if (product == null)
             {
-                if (product.Id == id)
-                {
-                    return product;
-                }
+                throw new Exception("Product not found");
             }
-            throw new Exception("Product not found");
+
+            return product;
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return _appDbContext.Products.ToList();
+            return _appDbContext.Products.Include(a => a.ProductOrders).Include(a => a.Image);
         }
 
         public void UpdateProduct(Guid id, Product product)
         {
-            throw new NotImplementedException();
+            var p = _appDbContext.Products.Include(a => a.Image).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
+
+            p.Description = product.Name;
+            p.Description = product.Description;
+            p.Price = product.Price;
+            p.Quantity= product.Quantity;
+
+            p.Image.AzurePath = product.Image.AzurePath;
         }
     }
 }

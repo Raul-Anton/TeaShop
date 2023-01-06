@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Se
 builder.Services.AddMediatR(typeof(GetUsersQuery));
 builder.Services.AddAutoMapper(typeof(User));
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
