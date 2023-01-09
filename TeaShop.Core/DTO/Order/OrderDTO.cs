@@ -10,7 +10,5 @@ namespace TeaShop.Core.DTO.Order
     public class OrderDTO
     {
         public Guid UserId { get; set; }
-
-        public UserDTO User { get; set; }
     }
 }

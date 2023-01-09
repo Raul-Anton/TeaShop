@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,35 +26,33 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public void DeleteOrder(Guid id)
         {
-            foreach (var order in _appDbContext.Orders.ToList())
-            {
-                if (order.Id == id)
-                {
-                    _appDbContext.Orders.Remove(order);
-                }
-            }
+            var order = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
+
+            _appDbContext.Orders.Remove(order);
         }
 
         public Order GetOrder(Guid id)
         {
-            foreach (var order in _appDbContext.Orders.ToList())
+            var order = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
+
+            if (order == null)
             {
-                if (order.Id == id)
-                {
-                    return order;
-                }
+                throw new Exception("Order not found");
             }
-            throw new Exception("Order not found");
+
+            return order;
         }
 
         public IEnumerable<Order> GetOrders()
         {
-            return _appDbContext.Orders.ToList();
+            return _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders);
         }
 
         public void UpdateOrder(Guid id, Order order)
         {
-            throw new NotImplementedException();
+            var o = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
+
+            o.User = order.User;
         }
     }
 }

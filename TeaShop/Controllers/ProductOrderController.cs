@@ -2,13 +2,16 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TeaShop.Core.Commands.Users.CreateUserCommand;
-using TeaShop.Core.Commands.Users.DeleteUserCommand;
-using TeaShop.Core.Commands.Users.UpdateUserCommand;
+using TeaShop.Core.Commands.Orders.DeleteOrderCommand;
+using TeaShop.Core.Commands.ProductOrders.CreateProductOrderCommand;
+using TeaShop.Core.Commands.ProductOrders.DeleteProductOrderCommand;
+using TeaShop.Core.Commands.ProductOrders.UpdateProductOrderCommand;
 using TeaShop.Core.Domain;
-using TeaShop.Core.DTO.User;
+using TeaShop.Core.DTO.ProductOrder;
+using TeaShop.Core.Queries.Orders.GetOrderQuery;
+using TeaShop.Core.Queries.ProductOrders.GetProductOrderQuery;
 using TeaShop.Core.Queries.ProductOrders.GetProductOrdersQuery;
-using TeaShop.Core.Queries.Users.GetUserQuery;
+using TeaShop.Core.Queries.Products.GetProductQuery;
 
 namespace TeaShop.Controllers
 {
@@ -37,26 +40,57 @@ namespace TeaShop.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetProductOrder(Guid id)
         {
-            return Ok();
+            var productOrder = await _mediator.Send(new GetProductOrderQuery { Id = id });
+            var productOrderDTO = _mapper.Map<ProductOrderDTO_Id>(productOrder);
+            return Ok(productOrderDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostProductOrder()
+        public async Task<IActionResult> PostProductOrder([FromBody] ProductOrderDTO productOrderDTO)
         {
-            return Ok();
+            var product = await _mediator.Send(new GetProductQuery { Id = productOrderDTO.ProductId });
+            var order = await _mediator.Send(new GetOrderQuery { Id = productOrderDTO.OrderId });
+
+            var productOrder = await _mediator.Send(new CreateProductOrderCommand
+            {
+                Id = new Guid(),
+                Product = product,
+                Order = order
+            }
+            );
+
+            var result = CreatedAtAction(nameof(GetProductOrder), new { Id = _mapper.Map<ProductOrderDTO, ProductOrder>(productOrderDTO).Id }, productOrder);
+            return result;
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateProductOrder(Guid Id, ProductOrder p)
+        public async Task<IActionResult> UpdateProductOrder(Guid id, [FromBody] ProductOrderDTO productOrderDTO)
         {
-            return Ok();
+            var product = await _mediator.Send(new GetProductQuery { Id = productOrderDTO.ProductId });
+            var order = await _mediator.Send(new GetOrderQuery { Id = productOrderDTO.OrderId });
+
+            var productOrder = await _mediator.Send(new UpdateProductOrderCommand
+            {
+                Id = id,
+                ProductOrder = new ProductOrder
+                {
+                    Product = product,
+                    Order = order
+                }
+            }
+            );
+
+            var result = CreatedAtAction(nameof(GetProductOrder), new { Id = _mapper.Map<ProductOrderDTO, ProductOrder>(productOrderDTO).Id }, productOrder);
+            return result;
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteProductOrder(Guid id)
         {
+            var productOrder = await _mediator.Send(new DeleteProductOrderCommand { Id = id });
+
             return Ok();
         }
     }

@@ -8,5 +8,10 @@ namespace TeaShop.Core.DTO.ProductOrder
 {
     public class ProductOrderDTO_Id
     {
+        public Guid Id { get; set; }
+
+        public Guid ProductId { get; set; }
+
+        public Guid OrderId { get; set; }
     }
 }

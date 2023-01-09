@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,35 +26,32 @@ namespace TeaShop.Infrastructure.Data.Repository
 
         public void DeleteProductOrder(Guid id)
         {
-            foreach (var productOrder in _appDbContext.ProductOrders.ToList())
-            {
-                if (productOrder.Id == id)
-                {
-                    _appDbContext.ProductOrders.Remove(productOrder);
-                }
-            }
+            var productOrder = _appDbContext.ProductOrders.Include(a => a.Product).Include(a => a.Order).SingleOrDefault(a => a.Id == id);
+
+            _appDbContext.ProductOrders.Remove(productOrder);
         }
 
         public ProductOrder GetProductOrder(Guid id)
         {
-            foreach (var productOrder in _appDbContext.ProductOrders.ToList())
-            {
-                if (productOrder.Id == id)
-                {
-                    return productOrder;
-                }
-            }
-            throw new Exception("User not found");
+            var productOrder = _appDbContext.ProductOrders.Include(a => a.Product).Include(a => a.Order).SingleOrDefault(a => a.Id == id);
+
+            if(productOrder== null) { throw new Exception("ProductOrder not found"); }
+
+            return productOrder;
+
         }
 
         public IEnumerable<ProductOrder> GetProductOrders()
         {
-            return _appDbContext.ProductOrders.ToList();
+            return _appDbContext.ProductOrders.Include(a => a.Product).Include(a => a.Order);
         }
 
         public void UpdateProductOrder(Guid id, ProductOrder productOrder)
         {
-            throw new NotImplementedException();
+            var pO = _appDbContext.ProductOrders.Include(a => a.Product).Include(a => a.Order).SingleOrDefault(a => a.Id == id);
+
+            pO.Product = productOrder.Product;
+            pO.Order = productOrder.Order;
         }
     }
 }

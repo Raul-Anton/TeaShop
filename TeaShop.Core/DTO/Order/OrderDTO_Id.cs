@@ -12,7 +12,5 @@ namespace TeaShop.Core.DTO.Order
         public Guid Id { get; set; }
 
         public Guid UserId { get; set; }
-
-        public UserDTO_Id User { get; set; }
     }
 }

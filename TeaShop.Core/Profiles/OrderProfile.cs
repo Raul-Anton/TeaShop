@@ -15,12 +15,8 @@ namespace TeaShop.Core.Profiles
         public OrderProfile()
         {
             CreateMap<Order, OrderDTO_Id>().ReverseMap();
-            CreateMap<User, UserDTO_Id>().ReverseMap();
-            CreateMap<Address, UserAddressDTO_Id>().ReverseMap();
 
             CreateMap<Order, OrderDTO>().ReverseMap();
-            CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<Address, UserAddressDTO>().ReverseMap();
         }
     }
 }

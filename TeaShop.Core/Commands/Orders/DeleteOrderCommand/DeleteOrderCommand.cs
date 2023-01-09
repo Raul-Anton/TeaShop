@@ -10,6 +10,5 @@ namespace TeaShop.Core.Commands.Orders.DeleteOrderCommand
     public class DeleteOrderCommand : IRequest
     {
         public Guid Id { get; set; }
-
     }
 }
