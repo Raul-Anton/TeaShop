@@ -9,6 +9,7 @@ using TeaShop.Core.Commands.Orders.UpdateOrderCommand;
 using TeaShop.Core.Domain;
 using TeaShop.Core.DTO.Order;
 using TeaShop.Core.DTO.User;
+using TeaShop.Core.Queries.Orders.GetCurrentOrderOfUserQuery;
 using TeaShop.Core.Queries.Orders.GetOrderQuery;
 using TeaShop.Core.Queries.Orders.GetOrdersQuery;
 using TeaShop.Core.Queries.ProductOrders.GetProductOrderQuery;
@@ -42,6 +43,16 @@ namespace TeaShop.Controllers
         public async Task<IActionResult> GetOrder(Guid id)
         {
             var order = await _mediator.Send(new GetOrderQuery { Id = id });
+            var orderDTO = _mapper.Map<OrderDTO_Id>(order);
+
+            return Ok(orderDTO);
+        }
+
+        [HttpGet]
+        [Route("/api/Order/Current-User/{id}")]
+        public async Task<IActionResult> GetCurrentOrderOfUser(Guid id)
+        {
+            var order = await _mediator.Send(new GetCurrentOrderOfUserQuery { UserId = id });
             var orderDTO = _mapper.Map<OrderDTO_Id>(order);
 
             return Ok(orderDTO);

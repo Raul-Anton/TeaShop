@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TeaShop.Core.Abstract;
 using TeaShop.Core.Abstract.Repository;
 using TeaShop.Core.Domain;
 using TeaShop.Core.Enum;
@@ -30,6 +32,21 @@ namespace TeaShop.Infrastructure.Data.Repository
             var order = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
 
             _appDbContext.Orders.Remove(order);
+        }
+
+        public Order GetCurrentOrderOfUser(Guid UserId)
+        {
+            var order = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders)
+                .Where(x => x.UserId == UserId)
+                .Where(x => x.orderStatus == OrderStatus.InProgress)
+                .FirstOrDefault();
+
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            return order;
         }
 
         public Order GetOrder(Guid id)
