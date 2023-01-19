@@ -19,6 +19,6 @@ namespace TeaShop.Core.DTO.Product
 
         //public ProductImageDTO Image { get; set; }
 
-        public IFormFile ImageFile { get; set; }
+        //public IFormFile ImageFile { get; set; }
     }
 }

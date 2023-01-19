@@ -11,6 +11,7 @@ using TeaShop.Core.DTO.Order;
 using TeaShop.Core.DTO.User;
 using TeaShop.Core.Queries.Orders.GetOrderQuery;
 using TeaShop.Core.Queries.Orders.GetOrdersQuery;
+using TeaShop.Core.Queries.ProductOrders.GetProductOrderQuery;
 using TeaShop.Core.Queries.Users.GetUserQuery;
 
 namespace TeaShop.Controllers
@@ -54,7 +55,7 @@ namespace TeaShop.Controllers
             var order = await _mediator.Send(new CreateOrderCommand
             {
                 Id = new Guid(),
-                User = user
+                User = user,
             }
             );
 
@@ -64,21 +65,23 @@ namespace TeaShop.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderDTO orderDTO)
+        public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderDTO_OrderStatus orderDTO_OrderStatus)
         {
-            var user = await _mediator.Send(new GetUserQuery { Id = orderDTO.UserId });
+            var user = await _mediator.Send(new GetUserQuery { Id = orderDTO_OrderStatus.UserId });
 
             var order = _mediator.Send(new UpdateOrderCommand
             {
                 Id = id,
                 Order = new Order
                 {
-                    User = user
+                    User = user,
+                    orderStatus = orderDTO_OrderStatus.orderStatus,
                 }
+                
             }
 );
 
-            var result = CreatedAtAction(nameof(GetOrder), new { Id = _mapper.Map<OrderDTO, Order>(orderDTO).Id }, order);
+            var result = CreatedAtAction(nameof(GetOrder), new { Id = _mapper.Map<OrderDTO_OrderStatus, Order>(orderDTO_OrderStatus).Id }, order);
             return result;
         }
 

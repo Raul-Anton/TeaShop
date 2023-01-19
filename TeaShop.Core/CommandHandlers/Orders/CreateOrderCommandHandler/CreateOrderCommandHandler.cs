@@ -26,6 +26,7 @@ namespace TeaShop.Core.CommandHandlers.Orders.CreateOrderCommandHandler
                 Id = request.Id,
                 UserId = request.UserId,
                 User = request.User,
+                orderStatus = Enum.OrderStatus.InProgress,
                 ProductOrders = request.ProductOrders,
             };
             _unitOfWork.OrderRepository.AddOrder(order);

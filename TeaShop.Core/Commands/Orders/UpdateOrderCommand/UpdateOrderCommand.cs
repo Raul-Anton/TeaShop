@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShop.Core.Domain;
+using TeaShop.Core.Enum;
 
 namespace TeaShop.Core.Commands.Orders.UpdateOrderCommand
 {

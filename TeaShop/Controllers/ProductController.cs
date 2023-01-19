@@ -19,13 +19,13 @@ namespace TeaShop.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly IImageService _imageService;
+        //private readonly IImageService _imageService;
 
-        public ProductController(IMediator mediator, IMapper mapper, IImageService imageService)
+        public ProductController(IMediator mediator, IMapper mapper/*, IImageService imageService*/)
         {
             _mediator = mediator;
             _mapper = mapper;
-            _imageService = imageService;
+            //_imageService = imageService;
         }
 
         [HttpGet]
@@ -52,7 +52,8 @@ namespace TeaShop.Controllers
         [HttpPost]
         public async Task<IActionResult> PostProduct([FromBody] ProductDTO productDTO)
         {
-            string azurePath = await _imageService.UploadFormFileAsync(productDTO.ImageFile);
+            string azurePath = "azure";
+                //await _imageService.UploadFormFileAsync(productDTO.ImageFile);
             var product = await _mediator.Send(new CreateProductCommand
             {
                 Id = new Guid(),
@@ -75,7 +76,8 @@ namespace TeaShop.Controllers
         [Route("{id}")]
         public async Task<IActionResult> PutProduct(Guid id, [FromBody] ProductDTO productDTO)
         {
-            string azurePath = await _imageService.UploadFormFileAsync(productDTO.ImageFile);
+            string azurePath = "azure";
+                //await _imageService.UploadFormFileAsync(productDTO.ImageFile);
             var product = await _mediator.Send(new UpdateProductCommand
             {
                 Id = id,

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using TeaShop.Core.Abstract.Repository;
 using TeaShop.Core.Domain;
+using TeaShop.Core.Enum;
 
 namespace TeaShop.Infrastructure.Data.Repository
 {
@@ -53,6 +54,7 @@ namespace TeaShop.Infrastructure.Data.Repository
             var o = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
 
             o.User = order.User;
+            o.orderStatus = order.orderStatus;
         }
     }
 }
