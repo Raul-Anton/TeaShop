@@ -58,9 +58,8 @@ namespace TeaShop.Controllers
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
             string fileName = file.FileName;
-            string imagePath = AppDomain.CurrentDomain.BaseDirectory + new Guid() +fileName ;
-
-            //Console.WriteLine(imagePath);
+            Guid guid = Guid.NewGuid();
+            string imagePath = AppDomain.CurrentDomain.BaseDirectory + guid + fileName ;
 
             using (FileStream stream = System.IO.File.Create(imagePath))
             {
@@ -76,8 +75,6 @@ namespace TeaShop.Controllers
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=storageaccountinternship;AccountKey=RZ+vz/KG1fOfe+zEi8n9TtNU9UY9ZpkZbjEgbNA/2xD1TN9+W3/lnFoZipJUn8atienNkjMDbKI1haB1vrLeCQ==;EndpointSuffix=core.windows.net");
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("images");
-
-            //Console.WriteLine(_currentImagePath + "1234");
 
             using (MemoryStream stream = new MemoryStream(System.IO.File.ReadAllBytes(_currentImagePath))) {
                 containerClient.UploadBlob(Path.GetFileName(_currentImagePath), stream);
