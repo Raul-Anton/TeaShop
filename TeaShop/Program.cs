@@ -1,5 +1,7 @@
+using Azure.Storage.Blobs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 using System.Text.Json.Serialization;
 using TeaShop.Core.Abstract;
 using TeaShop.Core.Abstract.Repository;
@@ -12,6 +14,8 @@ using TeaShop.Infrastructure.Data.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.AddSingleton(x => new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=storageaccountinternship;AccountKey=RZ+vz/KG1fOfe+zEi8n9TtNU9UY9ZpkZbjEgbNA/2xD1TN9+W3/lnFoZipJUn8atienNkjMDbKI1haB1vrLeCQ==;EndpointSuffix=core.windows.net"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
