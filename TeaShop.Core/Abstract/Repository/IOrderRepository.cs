@@ -14,7 +14,10 @@ namespace TeaShop.Core.Abstract.Repository
         IEnumerable<Order> GetOrders();
 
         Order GetOrder(Guid id);
+
         Order GetCurrentOrderOfUser(Guid UserId);
+
+        IEnumerable<Order> GetCurrentOrdersOfUser(Guid UserId);
 
         void DeleteOrder(Guid id);
 

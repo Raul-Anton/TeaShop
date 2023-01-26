@@ -49,6 +49,19 @@ namespace TeaShop.Infrastructure.Data.Repository
             return order;
         }
 
+        public IEnumerable<Order> GetCurrentOrdersOfUser(Guid UserId)
+        {
+            var orders = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders)
+                .Where(x => x.UserId == UserId);
+
+            if (orders == null)
+            {
+                throw new Exception("No orders found for the user");
+            }
+
+            return orders;
+        }
+
         public Order GetOrder(Guid id)
         {
             var order = _appDbContext.Orders.Include(a => a.User).Include(a => a.ProductOrders).SingleOrDefault(a => a.Id == id);
